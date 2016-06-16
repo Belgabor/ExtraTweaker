@@ -8,6 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
@@ -57,9 +58,9 @@ public class VanillaCommandBlockstats extends CommandBase {
             try {
                 ItemStack stack = new ItemStack(block, 1, meta);
                 if (ExtraTweaker.mtAvailable)
-                    return CommandLoggerBase.getObjectDeclaration(new ItemStack(block, 1, meta));
+                    return CommandLoggerBase.getObjectDeclaration(stack);
                 else 
-                    return stack.getUnlocalizedName() + "#" + meta;
+                    return Item.REGISTRY.getNameForObject(stack.getItem()) + "#" + meta;
             } catch (NullPointerException e) {
                 return block.getUnlocalizedName() + "#" + meta;
             }

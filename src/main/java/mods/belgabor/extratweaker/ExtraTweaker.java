@@ -2,6 +2,7 @@ package mods.belgabor.extratweaker;
 
 import minetweaker.MineTweakerImplementationAPI;
 import minetweaker.util.IEventHandler;
+import mods.belgabor.extratweaker.mods.mt.MT;
 import mods.belgabor.extratweaker.util.IModManager;
 import mods.belgabor.extratweaker.mods.vanilla.Vanilla;
 import net.minecraft.command.ServerCommandManager;
@@ -21,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mod(modid = ExtraTweaker.MOD_ID, version = ExtraTweaker.MOD_VERSION, name = ExtraTweaker.MOD_NAME)
-@Optional.InterfaceList({ @Optional.Interface(iface = "minetweaker.util.IEventHandler", modid = "MineTweaker3"), })
-public class ExtraTweaker implements IEventHandler<MineTweakerImplementationAPI.ReloadEvent> {
+public class ExtraTweaker {
     public static final String MOD_ID = "extratweaker";
     public static final String MOD_VERSION = "0.1";
     public static final String MOD_NAME = "ExtraTweaker";
@@ -45,6 +45,8 @@ public class ExtraTweaker implements IEventHandler<MineTweakerImplementationAPI.
         mtAvailable = Loader.isModLoaded("MineTweaker3");
         
         managers.add(new Vanilla());
+        if (mtAvailable)
+            managers.add(new MT());
     }
 
 
@@ -60,11 +62,10 @@ public class ExtraTweaker implements IEventHandler<MineTweakerImplementationAPI.
         registerCommands(event.getServer());
         if (mtAvailable) {
             registerLoggers();
-            MineTweakerImplementationAPI.onReloadEvent(this);
         }
     }
 
-    private void registerLoggers() {
+    public static void registerLoggers() {
         managers.stream().forEachOrdered(m -> m.registerTweakLoggers());
     }
 
@@ -72,9 +73,8 @@ public class ExtraTweaker implements IEventHandler<MineTweakerImplementationAPI.
         ServerCommandManager manager = (ServerCommandManager) server.getCommandManager();
         managers.stream().forEachOrdered(m -> m.registerCommands(manager));
     }
-
-    @Override
+/*
     public void handle(MineTweakerImplementationAPI.ReloadEvent reloadEvent) {
         registerLoggers();
-    }
+    }*/
 }
