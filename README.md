@@ -13,5 +13,6 @@ a port of the vanilla features I added in version 1.0 of AMTweaker.
 
 Features:
 * Command to dump block statistics in a certain radius around the player to a ;-separated csv file. Intended to evaluate worldgen (duplicate ores, generation level & amount)
+* [v0.2] Command to dump mod load order
 * [MT] change harvest level and tool for blocks and tools themselves (no guarantee it works for modded stuff)
 * [MT] change tool durability (no guarantee it works for modded stuff)

@@ -2,6 +2,7 @@ package mods.belgabor.extratweaker.mods.vanilla;
 
 import minetweaker.MineTweakerAPI;
 import mods.belgabor.extratweaker.mods.vanilla.commands.VanillaCommandBlockstats;
+import mods.belgabor.extratweaker.mods.vanilla.commands.VanillaCommandLoadorder;
 import mods.belgabor.extratweaker.mods.vanilla.handlers.Durability;
 import mods.belgabor.extratweaker.mods.vanilla.handlers.HarvestLevel;
 import mods.belgabor.extratweaker.mods.vanilla.loggers.VanillaCommandLoggerItem;
@@ -36,5 +37,6 @@ public class Vanilla implements IModManager {
     @Override
     public void registerCommands(ServerCommandManager manager) {
         manager.registerCommand(new VanillaCommandBlockstats());
+        manager.registerCommand(new VanillaCommandLoadorder());
     }
 }
