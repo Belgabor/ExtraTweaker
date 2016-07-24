@@ -16,3 +16,4 @@ Features:
 * [v0.2] Command to dump mod load order
 * [MT] change harvest level and tool for blocks and tools themselves (no guarantee it works for modded stuff)
 * [MT] change tool durability (no guarantee it works for modded stuff)
+* [MT, v0.3] change block hardness, blast resistance, emitted light level and light opacity (no guarantee it works for every block)

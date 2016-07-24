@@ -1,5 +1,8 @@
 # ExtraTwaeker
 
+## Version 0.3
+* BlockProperty MT handler (block hardness, resistance light level and light opacity)
+
 ## Version 0.2
 * loadorder command
 

@@ -46,11 +46,20 @@ public class VanillaCommandLoggerItem extends CommandLoggerBase implements IComm
                 Block block = ((ItemBlock) theItem).getBlock();
                 for (IBlockState state : block.getBlockState().getValidStates()) {
                     String meta = "?";
+                    String hardness = "?";
                     try {
                         meta = Integer.toString(block.getMetaFromState(state));
                     } catch (IllegalArgumentException e) {}
-                    logBoth(player, String.format("  %s: %s - %d", meta, block.getHarvestTool(state), block.getHarvestLevel(state)));
+                    try {
+                        hardness = Float.toString(block.getBlockHardness(state, null, null));
+                    } catch (Throwable e) {}
+                    logBoth(player, String.format("  %s: %s - %d; H: %s; LL: %d; LO: %d", meta, block.getHarvestTool(state), block.getHarvestLevel(state), hardness, block.getLightValue(state), block.getLightOpacity(state)));
                 }
+                String resistance = "?";
+                try {
+                    resistance = Float.toString(block.getExplosionResistance(null) * 5.0f);
+                } catch (Throwable e) {}
+                logBoth(player, String.format("  Resistance: %s", resistance));
             } else {
                 Set<String> classes = theItem.getToolClasses(itemStack);
                 if (classes.size() > 0) {

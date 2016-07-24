@@ -21,7 +21,7 @@ import java.util.List;
 @Mod(modid = ExtraTweaker.MOD_ID, version = ExtraTweaker.MOD_VERSION, name = ExtraTweaker.MOD_NAME)
 public class ExtraTweaker {
     public static final String MOD_ID = "extratweaker";
-    public static final String MOD_VERSION = "0.2";
+    public static final String MOD_VERSION = "0.3";
     public static final String MOD_NAME = "ExtraTweaker";
 
     public static Logger logger;

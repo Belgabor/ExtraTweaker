@@ -3,6 +3,7 @@ package mods.belgabor.extratweaker.mods.vanilla;
 import minetweaker.MineTweakerAPI;
 import mods.belgabor.extratweaker.mods.vanilla.commands.VanillaCommandBlockstats;
 import mods.belgabor.extratweaker.mods.vanilla.commands.VanillaCommandLoadorder;
+import mods.belgabor.extratweaker.mods.vanilla.handlers.BlockProperty;
 import mods.belgabor.extratweaker.mods.vanilla.handlers.Durability;
 import mods.belgabor.extratweaker.mods.vanilla.handlers.HarvestLevel;
 import mods.belgabor.extratweaker.mods.vanilla.loggers.VanillaCommandLoggerItem;
@@ -15,6 +16,7 @@ import net.minecraft.command.ServerCommandManager;
 public class Vanilla implements IModManager {
     @Override
     public void initTweaks() {
+        MineTweakerAPI.registerClass(BlockProperty.class);
         MineTweakerAPI.registerClass(Durability.class);
         MineTweakerAPI.registerClass(HarvestLevel.class);
     }
