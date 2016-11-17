@@ -4,10 +4,12 @@ import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.player.IPlayer;
 import minetweaker.api.server.ICommandFunction;
+import mods.belgabor.extratweaker.ExtraTweaker;
 import mods.belgabor.extratweaker.util.CommandLoggerBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.*;
+import org.apache.logging.log4j.Level;
 
 import java.util.Set;
 
@@ -19,10 +21,12 @@ import static mods.belgabor.extratweaker.helpers.InputHelper.toStack;
  */
 public class VanillaCommandLoggerItem extends CommandLoggerBase implements ICommandFunction {
     public static void register() {
-        MineTweakerAPI.server.addMineTweakerCommand("handextra", new String[] {
-                "/minetweaker handextra",
-                "    dump extra information about the held item"
-        }, new VanillaCommandLoggerItem());
+        if (MineTweakerAPI.server != null) {
+            MineTweakerAPI.server.addMineTweakerCommand("handextra", new String[] {
+                    "/minetweaker handextra",
+                    "    dump extra information about the held item"
+            }, new VanillaCommandLoggerItem());
+        }
     }
     
     @Override
