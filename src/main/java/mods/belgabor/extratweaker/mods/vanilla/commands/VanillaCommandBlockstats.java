@@ -99,7 +99,10 @@ public class VanillaCommandBlockstats extends CommandBase {
 
         @Override
         public int compare(BlockStats o1, BlockStats o2) {
-            return o1.count - o2.count;
+            int diff = o1.count - o2.count;
+            if (diff != 0)
+                return diff;
+            return o1.getTag().compareTo(o2.getTag());
         }
     }
 

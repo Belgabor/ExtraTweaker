@@ -2,6 +2,7 @@
 
 ## Version 0.4
 * [Updated] to Minecraft 1.11.2
+* [Fixed] an error in the blockstats command. Block types with the same number of occurrences were missing except one.
 
 ## Version 0.31
 * [Fixed] Client crash in MP (Belgabor/ExtraTweaker#1)
