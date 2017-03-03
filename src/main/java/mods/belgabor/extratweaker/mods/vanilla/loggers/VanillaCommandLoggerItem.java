@@ -68,7 +68,7 @@ public class VanillaCommandLoggerItem extends CommandLoggerBase implements IComm
                 Set<String> classes = theItem.getToolClasses(itemStack);
                 if (classes.size() > 0) {
                     for (String cl : classes) {
-                        logBoth(player, String.format("  %s: %d", cl, theItem.getHarvestLevel(itemStack, cl)));
+                        logBoth(player, String.format("  %s: %d", cl, theItem.getHarvestLevel(itemStack, cl, null, null)));
                     }
                 } else {
                     logBoth(player, "  None");

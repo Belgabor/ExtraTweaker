@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class CommandLoggerBase {
             if (!(xItem instanceof ItemStack))
                 return "?????";
             ItemStack item = (ItemStack) xItem;
-            count = item.stackSize;
+            count = item.getCount();
             int[] oreIds = OreDictionary.getOreIDs(item);
             ArrayList<Integer> oreRef = new ArrayList<>();
             for (int i : oreIds)
@@ -61,9 +62,9 @@ public class CommandLoggerBase {
             player.sendChat(s);
     }
 
-    protected static String getItemDeclaration(ItemStack stack) {
-        if (stack == null) {
-            return "null";
+    protected static String getItemDeclaration(@Nonnull ItemStack stack) {
+        if (stack.isEmpty()) {
+            return "EMPTY";
         }
         return MineTweakerMC.getIItemStack(stack).toString();
     }
@@ -97,7 +98,7 @@ public class CommandLoggerBase {
     public static String getFullObjectDeclaration(Object stack) {
         if (stack instanceof ItemStack) {
             ItemStack r = (ItemStack) stack;
-            return getItemDeclaration(r) + ((r.stackSize>1)?String.format(" * %d", r.stackSize):"");
+            return getItemDeclaration(r) + ((r.getCount()>1)?String.format(" * %d", r.getCount()):"");
         } else if (stack instanceof FluidStack) {
             return getItemDeclaration((FluidStack) stack);
         } else if (stack == null) {

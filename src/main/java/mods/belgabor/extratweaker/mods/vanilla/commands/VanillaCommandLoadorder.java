@@ -21,12 +21,12 @@ import java.io.OutputStreamWriter;
 public class VanillaCommandLoadorder extends CommandBase {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return "loadorder";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender sender) {
+    public String getUsage(ICommandSender sender) {
         return "/loadorder - Dump mod load order";
     }
 
@@ -41,10 +41,10 @@ public class VanillaCommandLoadorder extends CommandBase {
             writer = new OutputStreamWriter(new FileOutputStream(new File(ExtraTweaker.logsDir, "loadorder.csv")), "utf-8");
             writer.write("Order;ModID;Name;Version;Requirements;Dependencies\n");
         } catch (IOException e) {
-            sender.addChatMessage(new TextComponentString("Warning: Unable to open log file."));
+            sender.sendMessage(new TextComponentString("Warning: Unable to open log file."));
         }
         for (ModContainer mod : Loader.instance().getActiveModList()) {
-            sender.addChatMessage(new TextComponentString(String.format("[%s] %s", mod.getModId(), mod.getName())));
+            sender.sendMessage(new TextComponentString(String.format("[%s] %s", mod.getModId(), mod.getName())));
             total++;
             if (writer != null) {
                 try {
@@ -56,8 +56,8 @@ public class VanillaCommandLoadorder extends CommandBase {
                 }
             }
         }
-        sender.addChatMessage(new TextComponentString("Total: " + total));
+        sender.sendMessage(new TextComponentString("Total: " + total));
         if (errors)
-            sender.addChatMessage(new TextComponentString("There were errors writing the log file, it may be incomplete."));
+            sender.sendMessage(new TextComponentString("There were errors writing the log file, it may be incomplete."));
     }
 }

@@ -28,12 +28,12 @@ import java.util.*;
  */
 public class VanillaCommandBlockstats extends CommandBase {
     @Override
-    public String getCommandName() {
+    public String getName() {
         return "blockstats";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender sender) {
+    public String getUsage(ICommandSender sender) {
         return "/blockstats [range] - Dump block statistics around player in a certain range";
     }
     
@@ -57,6 +57,8 @@ public class VanillaCommandBlockstats extends CommandBase {
         protected String getTag() {
             try {
                 ItemStack stack = new ItemStack(block, 1, meta);
+                if (stack.isEmpty())
+                    throw new NullPointerException();
                 if (ExtraTweaker.mtAvailable)
                     return CommandLoggerBase.getObjectDeclaration(stack);
                 else 
@@ -68,7 +70,10 @@ public class VanillaCommandBlockstats extends CommandBase {
         
         protected String getName() {
             try {
-                return (new ItemStack(block, 1, meta)).getDisplayName();
+                ItemStack stack = new ItemStack(block, 1, meta);
+                if (stack.isEmpty())
+                    throw new NullPointerException();
+                return stack.getDisplayName();
             } catch (NullPointerException e) {
                 return block.getLocalizedName();
             }
@@ -101,7 +106,7 @@ public class VanillaCommandBlockstats extends CommandBase {
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] arguments) throws CommandException {
         if (arguments.length != 1) {
-            sender.addChatMessage(new TextComponentString("Wrong number of parameters."));
+            sender.sendMessage(new TextComponentString("Wrong number of parameters."));
             return;
         }
         int range;
@@ -111,10 +116,10 @@ public class VanillaCommandBlockstats extends CommandBase {
             range = -1;
         }
         if (range <= 0) {
-            sender.addChatMessage(new TextComponentString("Range must be a positive number."));
+            sender.sendMessage(new TextComponentString("Range must be a positive number."));
             return;
         }
-        sender.addChatMessage(new TextComponentString("Starting to collect block statistics, radius " + range));
+        sender.sendMessage(new TextComponentString("Starting to collect block statistics, radius " + range));
         World world = sender.getEntityWorld();
         BlockPos center = sender.getPosition();
         BlockPos from = new BlockPos(center.getX() - range, 0, center.getZ() - range);
@@ -155,10 +160,10 @@ public class VanillaCommandBlockstats extends CommandBase {
             writer = new OutputStreamWriter(new FileOutputStream(new File(ExtraTweaker.logsDir, String.format("blockstats_%d_%d_%d_%d.csv", world.provider.getDimension(), center.getX(), center.getZ(), range))), "utf-8");
             writer.write("Block;Unlocalized Name;Name;Meta;OreDict;count;total;Min Level;Max Level;Dimension ID;Dimension Name\n");
         } catch (IOException e) {
-            sender.addChatMessage(new TextComponentString("Warning: Unable to open log file."));
+            sender.sendMessage(new TextComponentString("Warning: Unable to open log file."));
         }
         for (BlockStats bl : sorted) {
-            sender.addChatMessage(new TextComponentString(String.format("%s  %d  %d-%d", bl.getTag(), bl.count, bl.minLevel, bl.maxLevel)));
+            sender.sendMessage(new TextComponentString(String.format("%s  %d  %d-%d", bl.getTag(), bl.count, bl.minLevel, bl.maxLevel)));
             if (writer != null) {
                 try {
                     writer.write(String.format("%s;%s;\"%s\";%d;%s;%d;%d;%d;%d;%d;\"%s\"\n", 
@@ -169,8 +174,8 @@ public class VanillaCommandBlockstats extends CommandBase {
                 }
             }
         }
-        sender.addChatMessage(new TextComponentString("Total: " + total));
+        sender.sendMessage(new TextComponentString("Total: " + total));
         if (errors)
-            sender.addChatMessage(new TextComponentString("There were errors writing the log file, it may be incomplete."));
+            sender.sendMessage(new TextComponentString("There were errors writing the log file, it may be incomplete."));
     }
 }

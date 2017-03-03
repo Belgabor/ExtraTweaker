@@ -37,6 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 public class InputHelper {
@@ -51,20 +52,20 @@ public class InputHelper {
         return block.getItem() instanceof ItemBlock;
     }
 
-    public static ItemStack toStack(IItemStack iStack) {
+    public static @Nonnull ItemStack toStack(IItemStack iStack) {
         return toStack(iStack, false);
     }
-    public static ItemStack toStack(IItemStack iStack, boolean trim) {
-        if (iStack == null) return null;
+    public static @Nonnull ItemStack toStack(IItemStack iStack, boolean trim) {
+        if (iStack == null) return ItemStack.EMPTY;
         else {
             Object internal = iStack.getInternal();
             if (internal == null || !(internal instanceof ItemStack)) {
                 MineTweakerAPI.getLogger().logError("Not a valid item stack: " + iStack);
             } else if (trim) {
                 ItemStack t = (ItemStack) internal;
-                if (t.stackSize > 1) {
+                if (t.getCount() > 1) {
                     MineTweakerAPI.getLogger().logWarning("Stack size not supported, reduced to one item.");
-                    t.stackSize = 1;
+                    t.setCount(1);
                 }
                 return t;
             }

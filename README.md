@@ -2,10 +2,10 @@ ExtraTweaker
 ============
 
 A Minecraft mod to add some additional capabilities to [CraftTweaker](http://minecraft.curseforge.com/projects/crafttweaker-customized-minetweaker3) 
-(CraftTweaker is based on [MineTweaker](http://minetweaker3.powerofbytes.com/) and the current implementation on Minecraft 1.9.4) and some useful 
+(CraftTweaker is based on [MineTweaker](http://minetweaker3.powerofbytes.com/) and the current implementation on Minecraft 1.9.4+) and some useful 
 vanilla commands.
 
-ExtraTweaker is the successor to [AMTweaker](http://minecraft.curseforge.com/projects/amtweaker), which will not be ported as is to 1.9.4 
+ExtraTweaker is the successor to [AMTweaker](http://minecraft.curseforge.com/projects/amtweaker), which will not be ported as is to 1.9.4+ 
 (The name was based on [Apple, Milk & Tea 2](http://mods.curse.com/mc-mods/minecraft/229325-applemilktea2), which will not be updated to 1.9.x+).
 
 I will add support for mods I like and don't have Mine-/Crafttweaker support by themselves or other addons, currently this is only

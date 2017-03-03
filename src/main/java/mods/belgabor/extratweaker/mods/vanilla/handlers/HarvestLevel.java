@@ -151,7 +151,7 @@ public class HarvestLevel {
             this.tool = tool;
             this.level = level;
             
-            currentLevel = theItem.getHarvestLevel(this.item, tool);
+            currentLevel = theItem.getHarvestLevel(this.item, tool, null, null);
         }
 
         @Override

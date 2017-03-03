@@ -32,6 +32,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class StackHelper {
     //Stack is the stack that is part of a recipe, stack2 is the one input trying to match
+    
+    /*
     public static boolean areEqual(ItemStack stack, ItemStack stack2) {
         return !(stack == null || stack2 == null) && stack.isItemEqual(stack2);
     }
@@ -62,4 +64,5 @@ public class StackHelper {
         }
         return "UNKNOWN";
     }
+    */
 }

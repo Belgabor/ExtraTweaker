@@ -21,7 +21,7 @@ import java.util.List;
 @Mod(modid = ExtraTweaker.MOD_ID, version = ExtraTweaker.MOD_VERSION, name = ExtraTweaker.MOD_NAME)
 public class ExtraTweaker {
     public static final String MOD_ID = "extratweaker";
-    public static final String MOD_VERSION = "0.31";
+    public static final String MOD_VERSION = "0.4";
     public static final String MOD_NAME = "ExtraTweaker";
 
     public static Logger logger;
@@ -39,7 +39,7 @@ public class ExtraTweaker {
     {
         logger = event.getModLog();
         logsDir = new File("logs/");
-        mtAvailable = Loader.isModLoaded("MineTweaker3");
+        mtAvailable = Loader.isModLoaded("crafttweaker");
         
         managers.add(new Vanilla());
         if (mtAvailable)
